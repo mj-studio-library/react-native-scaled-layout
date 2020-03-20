@@ -1,4 +1,5 @@
 # react-native-scaled-layout
+![npm](https://img.shields.io/npm/v/react-native-scaled-layout)
 
 ### Flexible, Scalable layout dimensions, font sizes for React Native
 
