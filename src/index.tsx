@@ -1,26 +1,34 @@
-import { Dimensions, StyleSheet, Text } from 'react-native';
-import React, { ReactElement } from 'react';
+import { Dimensions, StyleSheet, Text, TextProps, TextStyle } from 'react-native';
+import React, { ReactElement, ReactNode } from 'react';
 
-declare global {
-  interface Math {
-    clamp: (value: number, min: number, max: number) => number;
-  }
-}
-
-Math.clamp = (value: number, min: number, max: number): number => {
+function clamp(value: number, min: number, max: number): number {
   if (value < min) return min;
   if (value > max) return max;
   return value;
-};
+}
 
 const window = Dimensions.get('window');
 const minLength = Math.min(window.width, window.height);
-const dimenRatio = minLength / 375; /* 375 is our design screen width */
-// 0.5 ~ 1.5
-const dimenScale = Math.clamp(dimenRatio, 0.5, 1.5);
-// 0.75 ~ 1.3
-const fontScale = dimenScale >= 1 ? Math.min(dimenScale, 1.3) : Math.max(dimenScale * dimenScale, 0.75);
-export const _FONT_SCALE_ = fontScale;
+let dimenRatio: number; /* 375 is our design screen width */
+let dimenScale: number;
+let fontScale: number;
+export let _FONT_SCALE_: number;
+let _defaultFontSize: number;
+
+export function initScaledSettings(
+  designSpecWidth = 375,
+  dimenScaleRange: { min: number; max: number } = { min: 0.5, max: 1.5 },
+  fontScaleRange: { min: number; max: number } = { min: 0.75, max: 1.3 },
+  defaultFontsize = 12,
+): void {
+  dimenRatio = minLength / designSpecWidth;
+  dimenScale = clamp(dimenRatio, dimenScaleRange.min, dimenScaleRange.max);
+  fontScale =
+    dimenScale >= 1 ? Math.min(dimenScale, fontScaleRange.max) : Math.max(dimenScale * dimenScale, fontScaleRange.min);
+  _FONT_SCALE_ = fontScale;
+  _defaultFontSize = defaultFontsize;
+}
+initScaledSettings();
 
 declare global {
   interface Number {
@@ -36,16 +44,22 @@ Number.prototype.dimenScaled = function dimenScaled(): number {
 Number.prototype.fontScaled = function fontScaled(): number {
   return (this as number) * fontScale;
 };
-const defaultFontSize = 12;
 
-const _ScaledText = (props, ref): ReactElement => {
+type ScaledTextProps = {
+  style?: TextStyle;
+  children?: ReactNode;
+  allowFontScaling?: boolean;
+  customFontScale?: number;
+  ref?: React.Ref<Text>;
+} & TextProps;
+const _ScaledText = (props: ScaledTextProps, ref: React.Ref<Text>): ReactElement => {
   const { style, children, allowFontScaling, customFontScale } = props;
 
   let fontSize: number;
   if (Array.isArray(style)) {
-    fontSize = StyleSheet.flatten(style)?.fontSize ?? defaultFontSize;
+    fontSize = StyleSheet.flatten(style)?.fontSize ?? _defaultFontSize;
   } else {
-    fontSize = style?.fontSize ?? defaultFontSize;
+    fontSize = style?.fontSize ?? _defaultFontSize;
   }
 
   if (allowFontScaling !== false) {
@@ -65,4 +79,4 @@ const _ScaledText = (props, ref): ReactElement => {
   );
 };
 
-export const ScaledText = React.forwardRef(_ScaledText);
+export const ScaledText = React.forwardRef<Text, ScaledTextProps>(_ScaledText);
