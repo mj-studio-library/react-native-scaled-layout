@@ -1,12 +1,6 @@
 import { Dimensions, StyleSheet, Text, TextProps, TextStyle } from 'react-native';
 import React, { ReactElement, ReactNode } from 'react';
 
-function clamp(value: number, min: number, max: number): number {
-  if (value < min) return min;
-  if (value > max) return max;
-  return value;
-}
-
 const window = Dimensions.get('window');
 const minLength = Math.min(window.width, window.height);
 let dimenRatio: number; /* 375 is our design screen width */
@@ -15,6 +9,26 @@ let fontScale: number;
 export let _FONT_SCALE_: number;
 let _defaultFontSize: number;
 
+declare global {
+  interface Number {
+    dimenScaled: () => number;
+    fontScaled: () => number;
+  }
+}
+
+function clamp(value: number, min: number, max: number): number {
+  if (value < min) return min;
+  if (value > max) return max;
+  return value;
+}
+
+/**
+ * Set initial configuration for scaled layout behavior
+ * @param designSpecWidth your design width viewport width(zeplin, pigma etc...). If your design viewport is 375 x 1000 then 375 is a right value.
+ * @param dimenScaleRange dimension scale factor minimum & maximum range. default is [0.5, 1.5]..
+ * @param fontScaleRange font scale factor minimum & maximum range. default is [0.75, 1.3].
+ * @param defaultFontsize default <Text> fontSize. default is 12.
+ */
 export function initScaledSettings(
   designSpecWidth = 375,
   dimenScaleRange: { min: number; max: number } = { min: 0.5, max: 1.5 },
@@ -27,23 +41,17 @@ export function initScaledSettings(
     dimenScale >= 1 ? Math.min(dimenScale, fontScaleRange.max) : Math.max(dimenScale * dimenScale, fontScaleRange.min);
   _FONT_SCALE_ = fontScale;
   _defaultFontSize = defaultFontsize;
+
+  // eslint-disable-next-line no-extend-native
+  Number.prototype.dimenScaled = function dimenScaled(): number {
+    return (this as number) * dimenScale;
+  };
+  // eslint-disable-next-line no-extend-native
+  Number.prototype.fontScaled = function fontScaled(): number {
+    return (this as number) * fontScale;
+  };
 }
 initScaledSettings();
-
-declare global {
-  interface Number {
-    dimenScaled: () => number;
-    fontScaled: () => number;
-  }
-}
-// eslint-disable-next-line no-extend-native
-Number.prototype.dimenScaled = function dimenScaled(): number {
-  return (this as number) * dimenScale;
-};
-// eslint-disable-next-line no-extend-native
-Number.prototype.fontScaled = function fontScaled(): number {
-  return (this as number) * fontScale;
-};
 
 type ScaledTextProps = {
   style?: TextStyle;
