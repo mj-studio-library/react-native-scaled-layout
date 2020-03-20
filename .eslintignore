@@ -1,0 +1,6 @@
+**/*.test.*
+**/*.snap.*
+**/*.d.ts
+
+metro.config.js
+/dist

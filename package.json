@@ -1,0 +1,89 @@
+{
+  "name": "react-native-scaled-layout",
+  "version": "1.0.0",
+  "description": "Flexible, Scalable layout dimensions, font sizes for React Native",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mym0404/react-native-scaled-layout"
+  },
+  "keywords": [],
+  "author": "MJ Studio <mym0404@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mym0404/react-native-scaled-layout/issues"
+  },
+  "homepage": "",
+  "scripts": {
+    "check": "yarn asset && yarn lint && yarn tsc && yarn jest -u",
+    "dev": "ENVFILE=.env react-native start",
+    "asset": "yarn run icon && yarn run string && prettier ./src/utils/Icons.ts --write && eslint ./src/utils/Icons.ts --fix && prettier ./src/utils/Strings.ts --write && eslint ./src/utils/Strings.ts --fix",
+    "icon": "sh ./script/icon_constant.sh ./assets/icons ./src/utils/Icons.ts",
+    "string": "sh ./script/string_constant.sh ./assets/langs/ko.json ./src/utils/Strings.ts",
+    "tsc": "tsc",
+    "test": "jest",
+    "coverage": "open ./coverage/lcov-report/index.html",
+    "start": "yarn dev",
+    "codecov": "codecov",
+    "cp:config": "cp .env.sample .env",
+    "clear-jest": "jest --clearCache",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "android:shake": "adb shell input keyevent 82",
+    "android:device": "adb devices",
+    "android:device:debug": "adb -s ce021712c8f2093403 reverse tcp:8081 tcp:8081",
+    "android:apk": "cd android && ./gradlew assembleRelease",
+    "android:aab": "cd android && ./gradlew bundleRelease",
+    "android:release": "node node_modules/react-native/local-cli/cli.js run-android --variant=release",
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
+    "ios:release": "node node_modules/react-native/local-cli/cli.js run-ios --configuration Release",
+    "ios:iphone5": "node node_modules/react-native/local-cli/cli.js run-ios  --simulator='iPhone 5s'",
+    "ios:iphone7": "node node_modules/react-native/local-cli/cli.js run-ios  --simulator='iPhone 7'",
+    "ios:reset": "rm -rf ios/build/ModuleCache",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "build:ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ./ios",
+    "build:android": "react-native bundle --entry-file index.js --platform android --dev false --bundle-output android/main.jsbundle --assets-dest ./android"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": ">=0.50"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/plugin-transform-runtime": "7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@babel/runtime": "^7.8.7",
+    "@dooboo/eslint-config": "^0.3.8",
+    "@types/react": "^16.9.23",
+    "@types/react-native": "^0.61.21",
+    "babel-preset-react-native": "^5.0.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "import-sort-style-eslint": "^6.0.0",
+    "jetifier": "^1.6.5",
+    "metro-react-native-babel-preset": "^0.58.0",
+    "prettier": "^1.19.1",
+    "prettier-plugin-import-sort": "^0.0.3",
+    "typescript": "3.8.3"
+  },
+  "importSort": {
+    ".js, .jsx": {
+      "style": "eslint",
+      "options": {}
+    },
+    ".ts, .tsx": {
+      "parser": "typescript",
+      "style": "eslint",
+      "options": {}
+    }
+  }
+}
