@@ -103,4 +103,9 @@ export function initScaledSettings(
 }
 ```
 
+## Change Log
+
+* 1.0.6
+    - Apply round for fixing showing weird line because of floating number dimension
+
 ### feel free your fork or any PR! Thanks
