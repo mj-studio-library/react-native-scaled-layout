@@ -1,4 +1,7 @@
 # react-native-scaled-layout
+![npm](https://img.shields.io/npm/v/react-native-scaled-layout)
+
+## [Detail Article's Link 🔗](https://medium.com/mj-studio/stop-hesitate-to-support-the-ipad-in-react-native-1040edc318cd)
 
 ### Flexible, Scalable layout dimensions, font sizes for React Native
 
