@@ -44,11 +44,11 @@ export function initScaledSettings(
 
   // eslint-disable-next-line no-extend-native
   Number.prototype.dimenScaled = function dimenScaled(): number {
-    return (this as number) * dimenScale;
+    return Math.round((this as number) * dimenScale);
   };
   // eslint-disable-next-line no-extend-native
   Number.prototype.fontScaled = function fontScaled(): number {
-    return (this as number) * fontScale;
+    return Math.round((this as number) * fontScale);
   };
 }
 initScaledSettings();
