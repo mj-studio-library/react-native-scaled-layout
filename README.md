@@ -13,15 +13,15 @@
 
 ## Contents 🏆 
 
-* [Install](#install)
-* [Usage](#usage)
-  - [1. Configure Environment](#0.-configure-your-environment-or-wanted-behavior)
-  - [2. Use with extension functions](#1.-number-type-augmentation(extension))
-  - [3. ScaledText Component](#2.-scaledText-component)
-* [Calculation](#calculation)
-* [Trouble Shooting](#trouble-shooting)
-* [Todo](#todo)
-* [Change Logs](#change-log)
+* [Install](#install-)
+* [Usage](#usage-)
+  - [0. Configure Environment](#0-configure-your-environment-or-wanted-behavior)
+  - [1. Use with extension functions](#1-number-type-augmentationextension)
+  - [2. ScaledText Component](#2-scaledtext-component)
+* [Calculation](#calculation-)
+* [Trouble Shooting]#trouble-shooting%EF%B8%8F)
+* [Todo](#todo-)
+* [Change Logs](#change-log-)
 ## Install 💠 
 
 ```
