@@ -20,7 +20,7 @@
   },
   "homepage": "",
   "scripts": {
-    "check": "yarn asset && yarn lint && yarn tsc && yarn jest -u",
+    "check": "yarn lint && yarn tsc",
     "dev": "ENVFILE=.env react-native start",
     "asset": "yarn run icon && yarn run string && prettier ./src/utils/Icons.ts --write && eslint ./src/utils/Icons.ts --fix && prettier ./src/utils/Strings.ts --write && eslint ./src/utils/Strings.ts --fix",
     "icon": "sh ./script/icon_constant.sh ./assets/icons ./src/utils/Icons.ts",
