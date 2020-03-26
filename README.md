@@ -19,9 +19,9 @@
   - [1. Use with extension functions](#1-number-type-augmentationextension)
   - [2. ScaledText Component](#2-scaledtext-component)
 * [Calculation](#calculation-)
-* [Trouble Shooting]#trouble-shooting%EF%B8%8F)
+* [Trouble Shooting](#trouble-shooting%EF%B8%8F)
 * [Todo](#todo-)
-* [Change Logs](#change-log-)
+* [Change Logs](#change-logs-)
 ## Install 💠 
 
 ```
