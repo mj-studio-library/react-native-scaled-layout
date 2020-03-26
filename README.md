@@ -64,8 +64,7 @@ initScaledSettings(375, 875, { min: 0.5, max: 1.5 }, { min: 0.75, max: 1.35 }, 1
 // clamped with dimenScaleRange min, max value
 (36).heightScaled() /* or */ (36).h()
 
-// calculated with width, height of design spec
-// using diagonal length(Pythagoras theorem)
+// calculated with width length of design spec
 // clamped with fontScaleRange min, max value
 (24).fontScaled() /* or */ (24).f()
 ```
@@ -191,7 +190,8 @@ Please put `import 'react-native-scaled-layout'` to top of `index.js` or top of 
 * Create `ScaledView`, `ScaledTextInput`, `ScaledTouchableXXX` like `ScaledText`
 
 ## Change Logs 🔧  
-
+* 1.1.1
+    - `FontScale` is calculated with design spec width length not design spec diagonal length
 * 1.1.0 (Sorry to API changes)
     - `dimenScaled()` is renamed to `scaled()`
     - New `number` type augmentation `dimenWidthScaled()`, `dimenHeightScaled()`
