@@ -28,6 +28,12 @@
 npm i react-native-scaled-layout
 ```
 
+or
+
+```
+yarn add react-native-scaled-layout
+```
+
 ## Usage 📌 
 
 ### 0. Configure your environment or wanted behavior
