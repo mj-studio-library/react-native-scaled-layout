@@ -64,7 +64,9 @@ export function initScaledSettings(
   dimenHeightScale = clamp(dimenHeightRatio, dimenScaleRange.min, dimenScaleRange.max);
 
   fontScale =
-    dimenScale >= 1 ? Math.min(dimenScale, fontScaleRange.max) : Math.max(dimenScale * dimenScale, fontScaleRange.min);
+    dimenWidthScale >= 1
+      ? Math.min(dimenWidthScale, fontScaleRange.max)
+      : Math.max(dimenWidthScale * dimenWidthScale, fontScaleRange.min);
   _FONT_SCALE_ = fontScale;
   _defaultFontSize = defaultFontsize;
 
