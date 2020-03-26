@@ -71,7 +71,12 @@ style={{
 ### 2. ScaledText Component
 
 ```tsx
-<ScaledText customFontScale={isTablet ? 2 : undefined}>My Text</ScaledText>
+// automatically adjusted with (14).fontScaled()
+<ScaledText style={{fontSize: 14}}>My Text</ScaledText> 
+
+// ignore calculated font scale
+// fixed with 28(14 * 2)
+<ScaledText style={{fontSize: 14}} customFontScale={isTablet ? 2 : undefined}>My Text</ScaledText>
 ```
 
 `react-native-scaled-layout` is also compatible with [Styled Component](https://styled-components.com/)
