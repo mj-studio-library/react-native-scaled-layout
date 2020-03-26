@@ -61,10 +61,11 @@ Example in `ViewStyle`
 
 ```tsx
 style={{
-    height: (210).d() + safeAreaBottom,
+    width: (100).w(),
+    height: (210).h() + safeAreaBottom,
+    borderRadius: (16).d(),
     justifyContent: 'center',
-    paddingHorizontal: theme.sidePadding,
-    paddingBottom: safeAreaBottom + 24,
+    paddingBottom: safeAreaBottom + (24).h(),
 }}
 ```
 
