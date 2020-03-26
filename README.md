@@ -7,10 +7,21 @@
 
 ### Flexible, Scalable layout dimensions, font sizes for React Native
 
-<img src=https://github.com/mym0404/react-native-scaled-layout/blob/master/react-native-scaled-layout.jpg width=100%>
+<img src=https://github.com/mym0404/react-native-scaled-layout/blob/master/react-native-scaled-layout.jpg width=60%>
 
 `react-native-scaled-layout` is using monkey-patch feature in javascript(typescript) and augmentation syntax in typescript.
 
+## Contents 🏆 
+
+* [Install](#install)
+* [Usage](#usage)
+  - [1. Configure Environment](#0.-configure-your-environment-or-wanted-behavior)
+  - [2. Use with extension functions](#1.-number-type-augmentation(extension))
+  - [3. ScaledText Component](#2.-scaledText-component)
+* [Calculation](#calculation)
+* [Trouble Shooting](#trouble-shooting)
+* [Todo](#todo)
+* [Change Logs](#change-log)
 ## Install 💠 
 
 ```
@@ -19,7 +30,9 @@ npm i react-native-scaled-layout
 
 ## Usage 📌 
 
-### 0. Configure your environment or wanted behavior(Optional)
+### 0. Configure your environment or wanted behavior
+
+❕ If `react-native-scaled-layout` is not imported for side-effect, then `TypeError` will be invoked.
 
 _`index.js`_
 ```ts
@@ -166,11 +179,18 @@ export function initScaledSettings(
 initScaledSettings();
 ```
 
+## Trouble Shooting❗️ 
+
+### 1. TypeError: 40.d is not a function
+
+Please put `import 'react-native-scaled-layout'` to top of `index.js` or top of file which in `setupFiles` list of `jest.config.js` 
+
+
 ## Todo ✅ 
 
 * Create `ScaledView`, `ScaledTextInput`, `ScaledTouchableXXX` like `ScaledText`
 
-## Change Log 🔧  
+## Change Logs 🔧  
 
 * 1.1.0 (Sorry to API changes)
     - `dimenScaled()` is renamed to `scaled()`
