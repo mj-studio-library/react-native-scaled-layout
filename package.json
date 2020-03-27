@@ -1,6 +1,6 @@
 {
   "name": "react-native-scaled-layout",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Flexible, Scalable layout dimensions, font sizes for React Native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/mym0404/react-native-scaled-layout/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/mym0404/react-native-scaled-layout",
   "scripts": {
     "check": "yarn lint && yarn tsc",
     "dev": "ENVFILE=.env react-native start",
