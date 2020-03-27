@@ -44,12 +44,11 @@ _`index.js`_
 ```ts
 import { initScaledSettings } from 'react-native-scaled-layout';
 ...
-initScaledSettings(375, 875, { min: 0.5, max: 1.5 }, { min: 0.75, max: 1.35 }, 14);
+initScaledSettings(375, { min: 0.5, max: 1.5 }, { min: 0.75, max: 1.35 }, 14);
 ```
 | Params              |  Type   | Default | Required |
 | ------------------- |---------|---------|----------|
 | designSpecWidth     | number  | 375     | false    |
-| designSpecHeight    | number  | 875     | false    |
 | dimenScaleRange     | `{ min: number; max: number }` | [0.5, 1.5] | false |
 | fontScaleRange      | `{ min: number; max: number }` | [0.75, 1.3] | false |
 | defaultFontSize     | number | 14 | false |
@@ -57,18 +56,9 @@ initScaledSettings(375, 875, { min: 0.5, max: 1.5 }, { min: 0.75, max: 1.35 }, 1
 ### 1. Number type Augmentation(Extension)
 
 ```ts
-// calculated with width, height of design spec
-// using diagonal length(Pythagoras theorem)
-// clamped with dimenScaleRange min, max value
-(36).scaled() /* or */ (36).d() 
-
 // calculated with width length of design spec
 // clamped with dimenScaleRange min, max value
-(36).widthScaled() /* or */ (36).w()
-
-// calculated with height length of design spec
-// clamped with dimenScaleRange min, max value
-(36).heightScaled() /* or */ (36).h()
+(36).scaled() /* or */ (36).d() 
 
 // calculated with width length of design spec
 // clamped with fontScaleRange min, max value
@@ -79,11 +69,11 @@ Example in `ViewStyle`
 
 ```tsx
 style={{
-    width: (100).w(),
-    height: (210).h() + safeAreaBottom,
+    width: (100).d(),
+    height: (210).d() + safeAreaBottom,
     borderRadius: (16).d(),
     justifyContent: 'center',
-    paddingBottom: safeAreaBottom + (24).h(),
+    paddingBottom: safeAreaBottom + (24).d(),
 }}
 ```
 
@@ -122,7 +112,6 @@ The following is the implementation of `initScaledSettings`
 /**
  * Set initial configuration for scaled layout behavior. If your height of design guideline spec is less than width, invert 1st, 2nd params.
  * @param designSpecWidth your design width viewport width(zeplin, pigma etc...). If your design viewport is 375 x 1000 then 375 is a right value.
- * @param designSpecHeight your design width viewport height(zeplin, pigma etc...). If your design viewport is 375 x 1000 then 1000 is a right value.
  * @param dimenScaleRange dimension scale factor minimum & maximum range. default is [0.5, 1.5]..
  * @param fontScaleRange font scale factor minimum & maximum range. default is [0.75, 1.3].
  * @param defaultFontsize default `<Text>` fontSize. default is 12.
@@ -134,20 +123,13 @@ The following is the implementation of `initScaledSettings`
  */
 export function initScaledSettings(
   designSpecWidth = 375,
-  designSpecHeight = 812,
   dimenScaleRange: { min: number; max: number } = { min: 0.5, max: 1.5 },
   fontScaleRange: { min: number; max: number } = { min: 0.75, max: 1.3 },
   defaultFontsize = 12,
 ): void {
-  dimenRatio =
-    Math.sqrt(minLength * minLength + maxLength * maxLength) /
-    Math.sqrt(designSpecWidth * designSpecWidth + designSpecHeight * designSpecHeight);
-  dimenWidthRatio = minLength / designSpecWidth;
-  dimenHeightRatio = maxLength / designSpecHeight;
+  dimenRatio = minLength / designSpecWidth;
 
   dimenScale = clamp(dimenRatio, dimenScaleRange.min, dimenScaleRange.max);
-  dimenWidthScale = clamp(dimenWidthRatio, dimenScaleRange.min, dimenScaleRange.max);
-  dimenHeightScale = clamp(dimenHeightRatio, dimenScaleRange.min, dimenScaleRange.max);
 
   fontScale =
     dimenScale >= 1 ? Math.min(dimenScale, fontScaleRange.max) : Math.max(dimenScale * dimenScale, fontScaleRange.min);
@@ -158,23 +140,11 @@ export function initScaledSettings(
   Number.prototype.scaled = function scaled(): number {
     return Math.round((this as number) * dimenScale);
   };
-  Number.prototype.widthScaled = function widthScaled(): number {
-    return Math.round((this as number) * dimenWidthScale);
-  };
-  Number.prototype.heightScaled = function heightScaled(): number {
-    return Math.round((this as number) * dimenHeightScale);
-  };
   Number.prototype.fontScaled = function fontScaled(): number {
     return Math.round((this as number) * fontScale);
   };
   Number.prototype.d = function d(): number {
     return (this as number).scaled();
-  };
-  Number.prototype.w = function w(): number {
-    return (this as number).widthScaled();
-  };
-  Number.prototype.h = function h(): number {
-    return (this as number).heightScaled();
   };
   Number.prototype.f = function f(): number {
     return (this as number).fontScaled();
@@ -196,6 +166,9 @@ Please put `import 'react-native-scaled-layout'` to top of `index.js` or top of 
 * Create `ScaledView`, `ScaledTextInput`, `ScaledTouchableXXX` like `ScaledText`
 
 ## Change Logs 🔧  
+* 1.1.2
+    - `dimenWidthScaled()`, `dimenHeightScaled()`, `w()`, `h()` are removed
+    - `designSpecHeight` parameter is removed from `initScaledSettings`
 * 1.1.1
     - `FontScale` is calculated with design spec width length not design spec diagonal length
 * 1.1.0 (Sorry to API changes)
