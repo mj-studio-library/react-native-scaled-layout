@@ -73,10 +73,11 @@ type ScaledTextProps = {
   children?: ReactNode;
   allowFontScaling?: boolean;
   customFontScale?: number;
+  minimumFontSize?: number;
   ref?: React.Ref<Text>;
 } & TextProps;
 const _ScaledText = (props: ScaledTextProps, ref: React.Ref<Text>): ReactElement => {
-  const { style, children, allowFontScaling, customFontScale } = props;
+  const { style, children, allowFontScaling, customFontScale, minimumFontSize } = props;
 
   let fontSize: number;
   if (Array.isArray(style)) {
@@ -95,6 +96,11 @@ const _ScaledText = (props: ScaledTextProps, ref: React.Ref<Text>): ReactElement
       fontSize *= _FONT_SCALE_;
     }
   }
+
+  if (minimumFontSize) {
+    fontSize = Math.max(minimumFontSize, fontSize);
+  }
+
   return (
     <Text ref={ref} allowFontScaling={false} {...props} style={[style, { fontSize }]}>
       {children}
