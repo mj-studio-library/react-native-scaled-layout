@@ -166,7 +166,7 @@ Please put `import 'react-native-scaled-layout'` to top of `index.js` or top of 
 * Create `ScaledView`, `ScaledTextInput`, `ScaledTouchableXXX` like `ScaledText`
 
 ## Change Logs 🔧  
-* 1.1.3
+* 1.1.4
     - `minimumFontSize` prop is added in `ScaledText`
 * 1.1.2
     - `dimenWidthScaled()`, `dimenHeightScaled()`, `w()`, `h()` are removed
