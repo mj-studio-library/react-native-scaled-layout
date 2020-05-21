@@ -53,10 +53,10 @@ export function initScaledSettings(
 
   /* eslint-disable no-extend-native */
   Number.prototype.scaled = function scaled(): number {
-    return Math.round((this as number) * dimenScale);
+    return Math.ceil((this as number) * dimenScale);
   };
   Number.prototype.fontScaled = function fontScaled(): number {
-    return Math.round((this as number) * fontScale);
+    return Math.ceil((this as number) * fontScale);
   };
   Number.prototype.d = function d(): number {
     return (this as number).scaled();
