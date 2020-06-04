@@ -1,5 +1,5 @@
-import { Dimensions, StyleSheet, Text, TextProps, TextStyle } from 'react-native';
-import React, { ReactElement, ReactNode } from 'react';
+import {Dimensions, StyleSheet, Text, TextProps, TextStyle, StyleProp} from 'react-native';
+import React, {ReactElement, ReactNode} from 'react';
 
 const window = Dimensions.get('window');
 const minLength = Math.min(window.width, window.height);
@@ -69,7 +69,7 @@ export function initScaledSettings(
 initScaledSettings();
 
 type ScaledTextProps = {
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
   children?: ReactNode;
   allowFontScaling?: boolean;
   customFontScale?: number;
@@ -79,26 +79,21 @@ type ScaledTextProps = {
 const _ScaledText = (props: ScaledTextProps, ref: React.Ref<Text>): ReactElement => {
   const { style, children, allowFontScaling, customFontScale, minimumFontSize } = props;
 
-  let fontSize: number;
-  if (Array.isArray(style)) {
-    fontSize = StyleSheet.flatten(style)?.fontSize ?? _defaultFontSize;
-  } else {
-    fontSize = style?.fontSize ?? _defaultFontSize;
-  }
+  let fontSize = StyleSheet.flatten(style).fontSize ?? _defaultFontSize;
 
   if (allowFontScaling !== false) {
     if (
       typeof customFontScale === 'number' &&
       ((customFontScale > 1 && _FONT_SCALE_ > 1) || (customFontScale < 1 && _FONT_SCALE_ < 1))
     ) {
-      fontSize *= customFontScale;
+      fontSize = Math.ceil(fontSize * customFontScale);
     } else {
-      fontSize *= _FONT_SCALE_;
+      fontSize = Math.ceil(fontSize * _FONT_SCALE_);
     }
   }
 
   if (minimumFontSize) {
-    fontSize = Math.max(minimumFontSize, fontSize);
+    fontSize = Math.ceil(Math.max(minimumFontSize, fontSize));
   }
 
   return (
