@@ -9,7 +9,7 @@
 
 <img src=https://github.com/mym0404/react-native-scaled-layout/blob/master/react-native-scaled-layout.jpg width=60%>
 
-`react-native-scaled-layout` is using monkey-patch feature in javascript(typescript) and augmentation syntax in typescript.
+`@mj-studio/react-native-scaled-layout` is using monkey-patch feature in javascript(typescript) and augmentation syntax in typescript.
 
 ## Contents 🏆 
 
@@ -25,24 +25,24 @@
 ## Install 💠 
 
 ```
-npm i react-native-scaled-layout
+npm i @mj-studio/react-native-scaled-layout
 ```
 
 or
 
 ```
-yarn add react-native-scaled-layout
+yarn add @mj-studio/react-native-scaled-layout
 ```
 
 ## Usage 📌 
 
 ### 0. Configure your environment or wanted behavior
 
-❕ If `react-native-scaled-layout` is not imported for side-effect, then `TypeError` will be invoked.
+❕ If `@mj-studio/react-native-scaled-layout` is not imported for side-effect, then `TypeError` will be invoked.
 
 _`index.js`_
 ```ts
-import { initScaledSettings } from 'react-native-scaled-layout';
+import { initScaledSettings } from '@mj-studio/react-native-scaled-layout';
 ...
 initScaledSettings(375, { min: 0.5, max: 1.5 }, { min: 0.75, max: 1.35 }, 14);
 ```
@@ -158,7 +158,7 @@ initScaledSettings();
 
 ### 1. TypeError: 40.d is not a function
 
-Please put `import 'react-native-scaled-layout'` to top of `index.js` or top of file which in `setupFiles` list of `jest.config.js` 
+Please put `import '@mj-studio/react-native-scaled-layout'` to top of `index.js` or top of file which in `setupFiles` list of `jest.config.js` 
 
 
 ## Todo ✅ 
