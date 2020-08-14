@@ -1,5 +1,5 @@
-import {Dimensions, StyleSheet, Text, TextProps, TextStyle, StyleProp} from 'react-native';
-import React, {ReactElement, ReactNode} from 'react';
+import { Dimensions, StyleProp, StyleSheet, Text, TextProps, TextStyle } from 'react-native';
+import React, { ReactElement, ReactNode } from 'react';
 
 const window = Dimensions.get('window');
 const minLength = Math.min(window.width, window.height);

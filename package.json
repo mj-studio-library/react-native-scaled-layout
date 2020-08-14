@@ -1,5 +1,5 @@
 {
-  "name": "react-native-scaled-layout",
+  "name": "@mj-studio/react-native-scaled-layout",
   "version": "1.1.7",
   "description": "Flexible, Scalable layout dimensions, font sizes for React Native",
   "main": "dist/index.js",
@@ -47,8 +47,8 @@
     "import-sort-style-eslint": "^6.0.0",
     "jetifier": "^1.6.5",
     "metro-react-native-babel-preset": "^0.58.0",
-    "prettier": "^1.19.1",
-    "prettier-plugin-import-sort": "^0.0.3",
+    "prettier": "^2.0.5",
+    "prettier-plugin-import-sort": "^0.0.4",
     "typescript": "3.8.3"
   },
   "importSort": {
