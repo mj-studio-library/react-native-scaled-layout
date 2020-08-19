@@ -75,31 +75,33 @@ type ScaledTextProps = {
   customFontScale?: number;
   minimumFontSize?: number;
 } & TextProps;
-export const ScaledText = (props: ScaledTextProps): ReactElement => {
-  const { style, children, allowFontScaling, customFontScale, minimumFontSize } = props;
+export const ScaledText = React.forwardRef(
+  (props: ScaledTextProps, ref: React.Ref<Text>): ReactElement => {
+    const { style, children, allowFontScaling, customFontScale, minimumFontSize, ...rest } = props;
 
-  let fontSize = StyleSheet.flatten(style)?.fontSize ?? _defaultFontSize;
+    let fontSize = StyleSheet.flatten(style)?.fontSize ?? _defaultFontSize;
 
-  if (allowFontScaling !== false) {
-    if (
-      typeof customFontScale === 'number' &&
-      ((customFontScale > 1 && _FONT_SCALE_ > 1) || (customFontScale < 1 && _FONT_SCALE_ < 1))
-    ) {
-      fontSize = Math.ceil(fontSize * customFontScale);
-    } else {
-      fontSize = Math.ceil(fontSize * _FONT_SCALE_);
+    if (allowFontScaling !== false) {
+      if (
+        typeof customFontScale === 'number' &&
+        ((customFontScale > 1 && _FONT_SCALE_ > 1) || (customFontScale < 1 && _FONT_SCALE_ < 1))
+      ) {
+        fontSize = Math.ceil(fontSize * customFontScale);
+      } else {
+        fontSize = Math.ceil(fontSize * _FONT_SCALE_);
+      }
     }
-  }
 
-  if (minimumFontSize) {
-    fontSize = Math.ceil(Math.max(minimumFontSize, fontSize));
-  }
+    if (minimumFontSize) {
+      fontSize = Math.ceil(Math.max(minimumFontSize, fontSize));
+    }
 
-  return (
-    <Text allowFontScaling={false} {...props} style={StyleSheet.flatten([style, { fontSize }])}>
-      {children}
-    </Text>
-  );
-};
+    return (
+      <Text ref={ref} allowFontScaling={false} style={StyleSheet.flatten([style, { fontSize }])} {...rest}>
+        {children}
+      </Text>
+    );
+  },
+);
 
 ScaledText.displayName = 'ScaledText';
