@@ -74,12 +74,11 @@ type ScaledTextProps = {
   allowFontScaling?: boolean;
   customFontScale?: number;
   minimumFontSize?: number;
-  ref?: React.Ref<Text>;
 } & TextProps;
-const _ScaledText = (props: ScaledTextProps, ref: React.Ref<Text>): ReactElement => {
+export const ScaledText = (props: ScaledTextProps): ReactElement => {
   const { style, children, allowFontScaling, customFontScale, minimumFontSize } = props;
 
-  let fontSize = StyleSheet.flatten(style).fontSize ?? _defaultFontSize;
+  let fontSize = StyleSheet.flatten(style)?.fontSize ?? _defaultFontSize;
 
   if (allowFontScaling !== false) {
     if (
@@ -97,10 +96,10 @@ const _ScaledText = (props: ScaledTextProps, ref: React.Ref<Text>): ReactElement
   }
 
   return (
-    <Text ref={ref} allowFontScaling={false} {...props} style={[style, { fontSize }]}>
+    <Text allowFontScaling={false} {...props} style={StyleSheet.flatten([style, { fontSize }])}>
       {children}
     </Text>
   );
 };
 
-export const ScaledText = React.forwardRef<Text, ScaledTextProps>(_ScaledText);
+ScaledText.displayName = 'ScaledText';
