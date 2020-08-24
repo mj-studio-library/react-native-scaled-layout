@@ -82,14 +82,10 @@ export const ScaledText = React.forwardRef(
     let fontSize = StyleSheet.flatten(style)?.fontSize ?? _defaultFontSize;
 
     if (allowFontScaling !== false) {
-      if (
-        typeof customFontScale === 'number' &&
-        ((customFontScale > 1 && _FONT_SCALE_ > 1) || (customFontScale < 1 && _FONT_SCALE_ < 1))
-      ) {
+      if (typeof customFontScale === 'number' && customFontScale > 0) {
         fontSize = Math.ceil(fontSize * customFontScale);
-      } else {
-        fontSize = Math.ceil(fontSize * _FONT_SCALE_);
       }
+      fontSize = Math.ceil(fontSize * _FONT_SCALE_);
     }
 
     if (minimumFontSize) {
