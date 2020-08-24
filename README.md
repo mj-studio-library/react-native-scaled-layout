@@ -166,6 +166,8 @@ Please put `import '@mj-studio/react-native-scaled-layout'` to top of `index.js`
 * Create `ScaledView`, `ScaledTextInput`, `ScaledTouchableXXX` like `ScaledText`
 
 ## Change Logs 🔧
+* 1.2.0
+    - Change `customFontScale` logic in `ScaledText`
 * 1.1.7
     - Fix `ScaledText` font size scaling issue. Previously, the `fontSize` property is multiplied to float not integer.
 * 1.1.6
