@@ -1,6 +1,6 @@
 {
   "name": "@mj-studio/react-native-scaled-layout",
-  "version": "1.1.11",
+  "version": "1.2.0",
   "description": "Flexible, Scalable layout dimensions, font sizes for React Native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
